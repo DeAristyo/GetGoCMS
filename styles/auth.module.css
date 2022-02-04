@@ -1,0 +1,110 @@
+.forminput {
+	display: flex;
+	flex-direction: column;
+}
+
+.forminput input {
+	padding: 0.5rem 0.3rem;
+	border-radius: 6px;
+	border: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+.forminput input:focus {
+	border: 2px solid #9ad0ec;
+	outline: none !important;
+	border-radius: 6px;
+}
+
+.signInContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.signInItems {
+	position: relative;
+	top: 5rem;
+	width: 25rem;
+	border-radius: 8px;
+	border: 4px solid #9ad0ec;
+	padding: 2rem 2.5rem;
+}
+
+.formButton {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 0.8rem;
+}
+
+.formButton button {
+	border-style: none;
+	border-radius: 6px;
+	padding: 0.5rem 0.8rem;
+	background-color: #1572a1;
+	color: white;
+}
+
+.phoneInput span {
+	font-weight: bolder;
+	font-size: 12px;
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-left: 0.6rem;
+	margin-right: 0.2rem;
+	display: flex;
+	align-items: center;
+}
+
+.phoneInputfocus span {
+	font-weight: bolder;
+	font-size: 12px;
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-left: 0.6rem;
+	margin-right: 0.2rem;
+	display: flex;
+	align-items: center;
+}
+
+.phoneInput input {
+	border-style: none;
+	width: 100%;
+}
+
+.phoneInput input:focus {
+	border-style: none;
+	outline: none !important;
+}
+
+.phoneInput {
+	display: flex;
+	border-radius: 6px;
+	border: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+.phoneInputfocus {
+	display: flex;
+	width: 100%;
+	border: 2px solid #9ad0ec;
+	outline: none !important;
+	border-radius: 6px;
+}
+
+.phoneInputfocus input {
+	border-style: none;
+	outline: none !important;
+	width: 100%;
+}
+
+.phoneInputfocus input:focus {
+	border-style: none;
+	outline: none !important;
+}
+
+.errMessage {
+	color: red;
+	opacity: 70%;
+	font-style: italic;
+	font-size: 14px;
+	margin-top: 0.4rem;
+}
