@@ -1,9 +1,27 @@
 .nav {
-	display: flex;
-	justify-content: flex-end;
 	width: 100%;
 	border-style: none;
-	box-shadow: 0 1px 10px 0.1px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 1px 10px 0.1px rgba(0, 0, 0, 0.2);
+	position: sticky;
 	top: 0;
-	padding: 1rem 0.8rem;
+	z-index: 1;
+	background-color: #fff;
+}
+
+.navItems {
+	display: flex;
+	justify-content: space-between;
+	padding: 1rem 1.2rem;
+}
+
+.navItems a {
+	cursor: pointer;
+	font-weight: bolder;
+	text-decoration: none;
+	color: #8f6c61;
+}
+
+.navItems a:hover {
+	text-decoration: none;
+	color: #dba595;
 }

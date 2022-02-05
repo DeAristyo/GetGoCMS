@@ -1,6 +1,11 @@
+.customModal {
+	max-width: 20rem;
+}
+
 .forminput {
 	display: flex;
 	flex-direction: column;
+	width: 25rem;
 }
 
 .forminput input {
@@ -13,37 +18,14 @@
 	outline: none !important;
 }
 
-.signInContainer {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+.forminput textarea {
+	padding: 0.5rem 0.3rem;
+	border: 1px solid rgba(0, 0, 0, 0.6);
 }
 
-.signInItems {
-	position: relative;
-	top: 5rem;
-	width: 25rem;
-	border: 4px solid #8f6c61;
-	padding: 2rem 2.5rem;
-}
-
-.formButton {
-	display: flex;
-	justify-content: flex-end;
-	margin-top: 0.8rem;
-}
-
-.formButton button {
-	border-style: none;
-	padding: 0.5rem 0.8rem;
-	background-color: #8f6c61;
-	color: white;
-	transition: ease-in-out 0.2s;
-}
-
-.formButton button:hover {
-	cursor: pointer;
-	box-shadow: 1px 2px 5px 0.1px rgba(0, 0, 0, 0.4);
+.forminput textarea:focus {
+	border: 2px solid #dba595;
+	outline: none !important;
 }
 
 .phoneInput span {
@@ -110,7 +92,11 @@
 	margin-left: 0.4rem;
 }
 
-.noAccount a {
-	color: #dba595;
-	font-style: italic;
+.buyButton {
+	font-size: 12px;
+	border-style: none;
+	padding: 0.5rem 0.8rem;
+	background-color: #8f6c61;
+	color: white;
+	transition: ease-in-out 0.2s;
 }
