@@ -14,6 +14,7 @@ export const BuyVoucherModal = () => {
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
 
+    const [toGift, setToGift] = useState(false);
     const [name, setName] = useState('');
     const [phone, setPhone] = useState(0);
     const [voucher, setVoucher] = useState(0);
@@ -72,7 +73,7 @@ export const BuyVoucherModal = () => {
                         null
                     }
                 </div>
-                <div className="col">
+                <div className={styles.voucherDrop}>
                     <h6>Vouchers :</h6>
                     <select
                         onChange={(e) => setVoucher(e.target.value)}
@@ -105,32 +106,37 @@ export const BuyVoucherModal = () => {
                 </div>
                 <div className="my-2 d-flex ">
                     <label className='form-check-label' htmlFor="check-type">
-                        <input className='form-check-input' type="checkbox" id='check-type' name='check-type' /> Buy as a gift?</label>
+                        <input className='form-check-input' type="checkbox" id='check-type' name='check-type' onChange={(e) => setToGift(e.target.checked)} /> Buy as a gift?</label>
                 </div>
-                <div className={styles.forminput}>
-                    <label style={{ marginTop: '0.8rem', marginBottom: '0.3rem' }}>Recipient Name : </label>
-                    <input className="form-control" placeholder="Recipient Name" />
-                </div>
-                <div className={styles.forminput}>
-                    <label style={{ marginTop: '0.8rem', marginBottom: '0.3rem' }}>Phone Number : </label>
-                    <div className='input-group'>
-                        <span className="input-group-text" id="Phone">+65</span>
-                        <input
-                            type='text'
-                            className='form-control'
-                            id='Phone'
-                            placeholder='Phone'
-                            aria-describedby="Phone"
-                            onChange={(e) => setPhone(e.target.value)}
-                        />
-                    </div>
-                </div>
-                <div className={styles.forminput}>
-                    <label style={{ marginTop: '0.8rem', marginBottom: '0.3rem' }}>Message : </label>
-                    <textarea className="form-control" placeholder="Message" maxLength='200' style={{ height: 100 }} />
-                </div>
+                {toGift ?
+                    <>
+                        <div className={styles.forminput}>
+                            <label style={{ marginTop: '0.8rem', marginBottom: '0.3rem' }}>Recipient Name : </label>
+                            <input className="form-control" placeholder="Recipient Name" />
+                        </div>
+                        <div className={styles.forminput}>
+                            <label style={{ marginTop: '0.8rem', marginBottom: '0.3rem' }}>Phone Number : </label>
+                            <div className='input-group'>
+                                <span className="input-group-text" id="Phone">+65</span>
+                                <input
+                                    type='text'
+                                    className='form-control'
+                                    id='Phone'
+                                    placeholder='Phone'
+                                    aria-describedby="Phone"
+                                    onChange={(e) => setPhone(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        <div className={styles.forminput}>
+                            <label style={{ marginTop: '0.8rem', marginBottom: '0.3rem' }}>Message : </label>
+                            <textarea className="form-control" placeholder="Message" maxLength='200' style={{ height: 100 }} />
+                        </div>
+                    </>
+                    :
+                    null}
                 <div className="my-4 d-flex justify-content-end">
-                    <button className={styles.buyButton} onClick={onSubmitData}>Buy Gift Card</button>
+                    <button className={styles.buyButton} onClick={onSubmitData} disabled={qty === 0 || qty > 3}>Buy Gift Card</button>
                 </div>
             </Modal>
         </div>

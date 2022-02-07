@@ -27,13 +27,13 @@ const SignIn = () => {
 
     const onSubmitData = async (e) => {
         e.preventDefault();
-        let phone = phoneNum;
-        let password = upassword;
+        let Phone = phoneNum;
+        let Password = upassword;
 
         try {
-            if (!phone || !password) throw { message: 'All Data Must Be Filled!' };
+            if (!Phone || !Password) throw { message: 'All Data Must Be Filled!' };
 
-            dispatch(Login(phone, password));
+            dispatch(Login(Phone, Password));
         } catch (error) {
             setErrorMessage(error.message);
         }

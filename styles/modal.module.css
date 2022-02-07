@@ -141,3 +141,7 @@
 	opacity: 60%;
 	font-size: 14px;
 }
+
+.voucherDrop select {
+	width: 25rem;
+}
