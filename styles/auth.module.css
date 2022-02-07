@@ -15,6 +15,7 @@
 
 .signInContainer {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 }
@@ -113,4 +114,23 @@
 .noAccount a {
 	color: #dba595;
 	font-style: italic;
+}
+
+.forminput input::-webkit-outer-spin-button,
+.forminput input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+.forminput input[type='number'] {
+	-moz-appearance: textfield;
+}
+
+.errMsg {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 4.5rem;
+	position: absolute;
 }

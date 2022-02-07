@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 
-import { Navbar } from '../components/navbar';
+import { UserVoucher } from '../components/userVoucher';
 import { BuyVoucherModal } from '../components/Modals/voucherModal';
 import { VoucherCarousel } from '../components/carousel';
 
@@ -16,8 +16,8 @@ export default function Home() {
         <p>AVAILABLE VOUCHERS</p>
         <VoucherCarousel />
       </div>
-      <div className={styles.btnContainer}>
-        <BuyVoucherModal />
+      <div className={styles.voucherContainer}>
+        <UserVoucher />
       </div>
     </div>
   );

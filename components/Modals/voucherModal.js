@@ -14,60 +14,28 @@ export const BuyVoucherModal = () => {
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
 
+    const [name, setName] = useState('');
+    const [phone, setPhone] = useState(0);
+    const [voucher, setVoucher] = useState(0);
+    const [qty, setQty] = useState(0);
+    const [message, setMessage] = useState('');
+    const [disabledQty, setDisabledQty] = useState({
+        max: 3,
+        min: 0
+    });
     const [checked, setChecked] = useState(true);
     const [focus, setFocus] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [addAddress, setAddAddress] = useState({
-        AddressName: '',
-        RecipientName: '',
-        RecipientPhone: 0,
-        AddressCity: '',
-        ZipCode: 0,
-        Province: '',
-        Districts: '',
-        AddressDetail: ''
-    });
-
-    const onFill = (val, dataType) => {
-        if (dataType === 'AddressName') {
-            setAddAddress({ ...addAddress, AddressName: val.target.value });
-        }
-        if (dataType === 'RecipientName') {
-            setAddAddress({ ...addAddress, RecipientName: val.target.value });
-        }
-        if (dataType === 'RecipientPhone') {
-            setAddAddress({ ...addAddress, RecipientPhone: val.target.value });
-        }
-        if (dataType === 'AddressCity') {
-            setAddAddress({ ...addAddress, AddressCity: val.target.value });
-        }
-        if (dataType === 'ZipCode') {
-            setAddAddress({ ...addAddress, ZipCode: val.target.value });
-        }
-        if (dataType === 'AddressDetail') {
-            setAddAddress({ ...addAddress, AddressDetail: val.target.value });
-        }
-        if (dataType === 'Districts') {
-            setAddAddress({ ...addAddress, Districts: val.target.value });
-        }
-        if (dataType === 'Province') {
-            setAddAddress({ ...addAddress, Province: val.target.value });
-        }
-    };
-
 
     const onSubmitData = () => {
-        let Address_Label = addAddress.AddressName;
-        let Recipient_Name = addAddress.RecipientName;
-        let Recipient_Phone = addAddress.RecipientPhone;
-        let City = addAddress.AddressCity;
-        let Province = addAddress.Province;
-        let Districts = addAddress.Districts;
-        let Zip_Code = addAddress.ZipCode;
-        let Full_Address = addAddress.AddressDetail;
+        let Name = name;
+        let Recipient_Phone = phone;
+        let Voucher = voucher;
+        let Quantity = qty;
+        let Message = message;
 
         try {
-            if (!Address_Label || !Districts || !Province || !Recipient_Name || !Recipient_Phone || !City || !Zip_Code || !Full_Address) throw { message: 'Data Must Be Filled' };
+            if (!Name || !Recipient_Phone || !Voucher || !Quantity || !Message) throw { message: 'Data Must Be Filled' };
 
             const userdata = localStorage.getItem('userInfoToken');
             const userDataParse = JSON.parse(userdata);
@@ -79,10 +47,10 @@ export const BuyVoucherModal = () => {
                 }
             };
 
-            Axios.post(`${API_URL}/user/userAddAddress`, { Address_Label, Recipient_Name, Recipient_Phone, City, Province, Districts, Zip_Code, Full_Address }, config)
+            Axios.post(`${API_URL}/user/userAddAddress`, { Name, Recipient_Phone, Voucher, Quantity, Message }, config)
                 .then((res) => {
                     alert('Add Address Success!');
-                    setOpenModal(false);
+                    setOpen(false);
                     window.location.reload();
                 })
                 .catch((err) => {
@@ -95,7 +63,7 @@ export const BuyVoucherModal = () => {
 
     return (
         <div>
-            <button onClick={onOpenModal}>Buy Gift Card</button>
+            <button onClick={onOpenModal}>+ Buy Gift Card</button>
             <Modal open={open} onClose={onCloseModal} center >
                 <div className="text-center mt-2 border-dark border-2">
                     {errorMessage !== '' ?
@@ -104,24 +72,62 @@ export const BuyVoucherModal = () => {
                         null
                     }
                 </div>
-                <div className={styles.forminput}>
-                    <label htmlFor="Phone" style={{ marginBottom: '0.3rem' }}>Name</label>
-                    <input type="text" id="Phone" className="form" placeholder="Full Name" />
+                <div className="col">
+                    <h6>Vouchers :</h6>
+                    <select
+                        onChange={(e) => setVoucher(e.target.value)}
+                        name='addPrdctCategory'
+                        className='form-control'>
+                        <option value='' hidden>Vouchers</option>
+                        <option value='1'>$25</option>
+                        <option value='2'>$50</option>
+                        <option value='3'>$75</option>
+                        <option value='4'>$100</option>
+                        <option value='5'>$150</option>
+                        <option value='6'>$200</option>
+                        <option value='7'>$300</option>
+                    </select>
+                </div>
+                <div className={styles.qtyContainer}>
+                    <label htmlFor="">Quantity :</label>
+                    <div className={styles.qtyItems}>
+                        <div className={styles.qtyInput}>
+                            <button onClick={() => setQty(qty - 1)} disabled={qty === disabledQty.min}>-</button>
+                            <span>{qty}</span>
+                            <button onClick={() => setQty(qty + 1)} disabled={qty === disabledQty.max}>+</button>
+                        </div>
+                        {qty === disabledQty.max ?
+                            <span className={styles.errQty}>You can only buy 3 voucher at a time!</span>
+                            :
+                            null
+                        }
+                    </div>
+                </div>
+                <div className="my-2 d-flex ">
+                    <label className='form-check-label' htmlFor="check-type">
+                        <input className='form-check-input' type="checkbox" id='check-type' name='check-type' /> Buy as a gift?</label>
                 </div>
                 <div className={styles.forminput}>
-                    <label htmlFor="Phone" style={{ marginTop: '0.8rem', marginBottom: '0.3rem' }}>Phone Number</label>
-                    <div className={!focus ? styles.phoneInput : styles.phoneInputfocus}>
-                        <span>+65</span>
-                        <input type="number" id="Phone" className="form" placeholder="Phone Number" onFocus={() => setFocus(true)} onBlur={() => setFocus(false)} />
+                    <label style={{ marginTop: '0.8rem', marginBottom: '0.3rem' }}>Recipient Name : </label>
+                    <input className="form-control" placeholder="Recipient Name" />
+                </div>
+                <div className={styles.forminput}>
+                    <label style={{ marginTop: '0.8rem', marginBottom: '0.3rem' }}>Phone Number : </label>
+                    <div className='input-group'>
+                        <span className="input-group-text" id="Phone">+65</span>
+                        <input
+                            type='text'
+                            className='form-control'
+                            id='Phone'
+                            placeholder='Phone'
+                            aria-describedby="Phone"
+                            onChange={(e) => setPhone(e.target.value)}
+                        />
                     </div>
                 </div>
                 <div className={styles.forminput}>
-                    <label htmlFor="Password" style={{ marginTop: '0.8rem', marginBottom: '0.3rem' }}>Message : </label>
-                    <textarea className="form" placeholder="Message" style={{ height: 100 }} />
-                </div>
-                <div className="my-2 d-flex ">
-                    <label htmlFor="radio-type">
-                        <input type="checkbox" id='check-type' name='check-type' /> Buy as a gift.</label>
+                    <label style={{ marginTop: '0.8rem', marginBottom: '0.3rem' }}>Message : </label>
+                    <textarea className="form-control" placeholder="Message" maxLength='200' style={{ height: 100 }} />
                 </div>
                 <div className="my-4 d-flex justify-content-end">
                     <button className={styles.buyButton} onClick={onSubmitData}>Buy Gift Card</button>

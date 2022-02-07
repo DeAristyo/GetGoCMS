@@ -98,5 +98,46 @@
 	padding: 0.5rem 0.8rem;
 	background-color: #8f6c61;
 	color: white;
-	transition: ease-in-out 0.2s;
+}
+
+.forminput input::-webkit-outer-spin-button,
+.forminput input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+.forminput input[type='number'] {
+	-moz-appearance: textfield;
+}
+
+.qtyContainer {
+	margin-top: 0.6rem;
+}
+
+.qtyContainer span {
+	margin: 0 1rem;
+}
+
+.qtyContainer button {
+	font-size: 12px;
+	border-style: none;
+	padding: 0.3rem 0.8rem;
+	background-color: #8f6c61;
+	color: white;
+}
+
+.qtyInput {
+	border: 2px solid #8f6c61;
+}
+
+.qtyItems {
+	display: flex;
+}
+
+.errQty {
+	font-style: italic;
+	color: red;
+	opacity: 60%;
+	font-size: 14px;
 }

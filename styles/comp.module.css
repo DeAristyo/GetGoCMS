@@ -1,0 +1,53 @@
+.noVoucherContainer {
+	display: flex;
+	flex-direction: column;
+}
+
+.noVoucherContainer p {
+	font-size: 24px;
+	font-weight: bolder;
+	text-align: center;
+	color: #8f6c61;
+	margin: 2rem auto 1rem;
+}
+
+.noVoucherContainer a {
+	text-decoration: none;
+	color: #a2553d;
+}
+
+.noVoucherContainer a:hover {
+	color: #40302b;
+}
+
+.voucherContainer {
+	display: flex;
+	flex-direction: column;
+	border-top: 1px solid #8f6c61;
+}
+
+.voucherContainer p {
+	font-size: 24px;
+	font-weight: bolder;
+	text-align: center;
+	color: #8f6c61;
+	margin: 2rem auto 1rem;
+}
+
+.voucherContainer a {
+	text-decoration: none;
+	color: #a2553d;
+}
+
+.voucherContainer a:hover {
+	color: #40302b;
+}
+
+.pageBtn {
+	border: none;
+	color: white;
+	background-color: #8f6c61;
+	margin-bottom: 1rem;
+	padding: 0.5rem 1rem;
+	align-self: center;
+}
