@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const SignIn = () => {
 
-    const { userInfo } = useSelector((state) => state.userAuth);
+    const { userInfo, error } = useSelector((state) => state.userAuth);
 
     const routers = useRouter();
     const dispatch = useDispatch();
@@ -26,6 +26,7 @@ const SignIn = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
     const onSubmitData = async (e) => {
+        setErrorMessage(error);
         e.preventDefault();
         let Phone = phoneNum;
         let Password = upassword;
@@ -50,6 +51,11 @@ const SignIn = () => {
                         {errorMessage}
                     </div>
                     :
+                    // error.length > 1 ?
+                    //     <div class="alert alert-danger" role="alert">
+                    //         {error}
+                    //     </div>
+                    //     :
                     null
                 }
             </div>

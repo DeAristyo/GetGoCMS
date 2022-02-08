@@ -1,20 +1,36 @@
-export const TableBody = (props) => {
+import { useSelector } from "react-redux";
+import { DeleteVoucherModal } from "./Modals/deleteVoucher";
+import { EditVoucher } from "./Modals/editVoucher";
+import 'bootstrap/dist/css/bootstrap.css';
+
+export const TableBody = () => {
+    const { userVoucherss } = useSelector((state) => state.userAuth);
+
     const format = (money) => {
-        let formatMoney = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(money);
+        let formatMoney = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(money);
         return formatMoney;
     };
 
+    if (userVoucherss === undefined || Object.keys(userVoucherss) === 0) {
+        return (
+            <div className="container text-center">
+                <p>LOADING . . .</p>
+            </div>
+        );
+    }
     return (
-        <tr className="text-center">
-            <td>{props.productData.SKU}</td>
-            <td>{props.productData.Name}</td>
-            <td>{format(props.productData.Price)}</td>
-            <td><img src={props.productData.Image} alt="" /></td>
-            <td>
-                <ProductDetailModal product={props.productData} />
-                <EditProductModals product={props.productData} />
-                <DeleteProductModal data={props.productData} />
-            </td>
-        </tr>
+        userVoucherss.map((val) => {
+            return (
+                <tr className="text-center">
+                    <td>{val.voucher_code}</td>
+                    <td>{format(val.amount)}</td>
+                    <td>{val.expiry_date}</td>
+                    <td>
+                        <EditVoucher code={val.voucher_code} desc={val.description} />
+                        <DeleteVoucherModal data={val.iduvoucher} />
+                    </td>
+                </tr>
+            );
+        })
     );
-}
+};

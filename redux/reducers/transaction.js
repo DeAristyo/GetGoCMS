@@ -47,3 +47,19 @@ export const voucherDetailReducer = (state = {
             return { ...state };
     }
 };
+
+export const userVoucherReducer = (state = {
+    userVouchers: {},
+    error: ''
+}, action) => {
+    switch (action.type) {
+        case constants.USER_VOUCHER:
+            return { ...state, userVouchers: action.payload };
+        case constants.USER_VOUCHER_FAIL:
+            return { ...state, error: action.payload };
+        case constants.USER_VOUCHER_RESET:
+            return { ...state, userVouchers: {}, error: '' };
+        default:
+            return { ...state };
+    }
+};

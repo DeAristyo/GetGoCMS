@@ -3,14 +3,16 @@ import { userAuth } from "./auth";
 import {
     userPayment,
     PaymentMethodReducer,
-    voucherDetailReducer
+    voucherDetailReducer,
+    userVoucherReducer
 } from "./transaction";
 
 const rootReducer = combineReducers({
     userAuth,
     userPayment,
     PaymentMethodReducer,
-    voucherDetailReducer
+    voucherDetailReducer,
+    userVoucherReducer
 });
 
 export default rootReducer;

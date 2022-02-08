@@ -1,68 +1,80 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import styles from '../styles/comp.module.css';
+import noVoucher from '../public/assets/noVoucher.svg';
+import { useSelector } from "react-redux";
+import Image from "next/image";
 
 import { TableBody } from "./tableBody";
+import { API_URL } from "../constants/urlApi";
 
 export const VoucherTable = () => {
-    const [page, setPage] = useState(1);
-    const [maxPage, setMaxPage] = useState(0);
-    const [itemPerPage, setItemPerPage] = useState(4);
+    const { userInfo } = useSelector((state) => state.userAuth);
+    const { userVoucherss } = useSelector((state) => state.userAuth);
+
+    // const [page, setPage] = useState(1);
+    // const [maxPage, setMaxPage] = useState(0);
+    // const [itemPerPage, setItemPerPage] = useState(4);
 
     // useEffect(() => {
-    //     fetchProduct();
-    // }, []);
+    //     if (Object.keys(userInfo).length > 0) {
+    //         setvoucherList(userVouchers)
+    //         setMaxPage(Math.ceil(re));
+    //     }
+    // }, [userInfo]);
 
-    const [productList, setProductList] = useState([]);
+    // const [voucherList, setvoucherList] = useState([]);
 
-    console.log(productList);
+    // console.log(voucherList);
 
-    const fetchProduct = () => {
-        Axios.get(`${API_URL}/admin/fetchProduct`)
-            .then((result) => {
-                setProductList(result.data.data);
-                setMaxPage(Math.ceil(result.data.data.length / itemPerPage));
-                // console.table(result.data.data);
-            })
-            .catch(() => {
-                alert('fetchProduct gagal');
-            });
-    };
+    // const fetchVoucher = () => {
+    //     Axios.post(`${API_URL}/cms/getAllUserVoucher`, userInfo.phone)
+    //         .then((result) => {
+    //             setvoucherList(result.data.data);
+    //             setMaxPage(Math.ceil(result.data.data.length / itemPerPage));
+    //             console.table(result.data.data);
+    //         })
+    //         .catch(() => {
+    //             alert('fetchVoucher failed');
+    //         });
+    // };
 
-    const renderProducts = () => {
-        const startingIndex = (page - 1) * itemPerPage; //0
-        let rawData = [...productList];
+    // const renderProducts = () => {
+    //     const startingIndex = (page - 1) * itemPerPage; //0
+    //     let rawData = [...voucherList];
 
-        const currentPage = rawData.slice(
-            startingIndex,
-            startingIndex + itemPerPage
-        );
-        return currentPage.map((val) => {
-            if (val.Category_ID.toLowerCase().includes(props.category) && val.Name.toLowerCase().includes(props.product)) {
-                return <TableBody productData={val} product={props.product} category={props.category} />;
-            }
-        });
-    };
-
-    const nextPageHandler = () => {
-        if (page !== maxPage) {
-            setPage(prev => prev + 1);
-        }
-    };
-
-    const prevPageHandler = () => {
-        if (page > 1) {
-            setPage(prev => prev - 1);
-        }
-    };
-
-    // if (productList.length < 1) {
-    //     return (
-    //         <div className="loading text-center mt-5">
-    //             <h2>Loading . . .</h2>
-    //         </div>
+    //     const currentPage = rawData.slice(
+    //         startingIndex,
+    //         startingIndex + itemPerPage
     //     );
-    // }
+    //     return currentPage.map((val) => {
+    //         if (val.Category_ID.toLowerCase().includes(props.category) && val.Name.toLowerCase().includes(props.product)) {
+    //             return <TableBody voucherData={val} />;
+    //         }
+    //     });
+    // };
+
+    // const nextPageHandler = () => {
+    //     if (page !== maxPage) {
+    //         setPage(prev => prev + 1);
+    //     }
+    // };
+
+    // const prevPageHandler = () => {
+    //     if (page > 1) {
+    //         setPage(prev => prev - 1);
+    //     }
+    // };
+
+    if (userVoucherss === undefined || Object.keys(userVoucherss) === 0) {
+        return (
+            <div className={styles.noVoucherContainer}>
+                <p>No Voucher!</p>
+                <Image src={noVoucher} width={500} height={150} />
+                <p>You have no eVoucher</p>
+            </div>
+        );
+    }
 
     return (
         <div className='table-container container p-0'>
@@ -75,9 +87,9 @@ export const VoucherTable = () => {
                         <th colSpan='2'>Action</th>
                     </tr>
                 </thead>
-                <tbody>{renderProducts()}</tbody>
+                <tbody><TableBody /></tbody>
             </table>
-            <div className="d-flex flex-row justify-content-center align-items-center mt-3">
+            {/* <div className="d-flex flex-row justify-content-center align-items-center mt-3">
                 <button
                     className={styles.pageBtn}
                     onClick={prevPageHandler}
@@ -95,7 +107,7 @@ export const VoucherTable = () => {
                 >
                     {'>'}
                 </button>
-            </div>
+            </div> */}
         </div>
     );
 };
